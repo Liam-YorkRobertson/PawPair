@@ -7,6 +7,7 @@
     <title>PawPair</title>
     <link rel="stylesheet" href="./style.css"> <!--placeholder-->
     <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!--placeholder-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhgGTbERJQi_NKs2xS3iAxX303W3fQ6iY&libraries=places"></script>
 </head>
 <body>
     <main>
@@ -14,10 +15,9 @@
         <form action="/profile" method="POST" enctype="multipart/form-data">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
+            <div id="location-display"></div>
             <label for="profile_image">Profile Image:</label>
             <input type="file" id="profile_image" name="profile_image" accept="image/*" required><br>
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" required><br>
             <label for="dog_name">Dog Name:</label>
             <input type="text" id="dog_name" name="dog_name" required><br>
             <label for="breed">Breed:</label>
@@ -31,6 +31,6 @@
             <button type="submit">Create Profile</button>
         </form>
     </main>
-    <script src="index.js"></script> <!--placeholder-->
+    <script src="{{ url_for('static', filename='scripts/profile.js') }}"></script>
 </body>
 </html>

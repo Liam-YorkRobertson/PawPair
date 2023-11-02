@@ -1,6 +1,7 @@
 //Implementation of Google Maps API
 
 function initAutocomplete() {
+    var locationInput = document.getElementById('location'); // Get the hidden input field
     var locationDisplay = document.getElementById('location-display');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -10,7 +11,9 @@ function initAutocomplete() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        locationDisplay.textContent = `Location: ${data.province}, ${data.country}`;
+                        var locationValue = `${data.province}, ${data.country}`;
+                        locationInput.value = locationValue; // Set the value of the hidden input field
+                        locationDisplay.textContent = `Location: ${locationValue}`;
                     } else {
                         console.error('Error fetching location data:', data.error);
                     }
@@ -21,4 +24,4 @@ function initAutocomplete() {
         console.error('Geolocation is not supported by this browser.');
     }
 }
-google.maps.event.addDomListener(window, 'load', initAutocomplete);
+window.onload = initAutocomplete;

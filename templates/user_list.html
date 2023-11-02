@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PawPair</title>
+    <link rel="stylesheet" href="./style.css"> <!-- Placeholder for your styles -->
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!-- Placeholder for your favicon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>User List</h1>
+
+    <div id="user_list_container">
+        {% for user_profile in user_profiles %}
+        {% if user_profile.breed == request.args.get('breed') %}
+        <div class="user-profile">
+            <p><strong>Username:</strong> {{ user_profile.username }}</p>
+            <p><strong>Location:</strong> {{ user_profile.location }}</p>
+            <p><strong>Dog Name:</strong> {{ user_profile.dog_name }}</p>
+            <p><strong>Breed:</strong> {{ user_profile.breed }}</p>
+            <p><strong>Age:</strong> {{ user_profile.age }}</p>
+            <p><strong>Description:</strong> {{ user_profile.description }}</p>
+            <p><strong>Profile Image:</strong><img src="/static/images/{{ user_profile.profile_image }}" alt="Profile Image"></p>
+            <p><strong>Dog Image:</strong><img src="/static/images/{{ user_profile.dog_image }}" alt="Dog Image"></p>
+            <button class="connect-button" onclick="connectToUser('{{ user_profile.username }}')">Connect to User</button>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <script src="{{ url_for('static', filename='scripts/user_list.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PawPair</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/user_dashboard.css') }}">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!-- Placeholder for your favicon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <main>
+        <h1>User Dashboard</h1>
+        <button onclick="window.location.href='/user_profile'">Your Profile</button><br><br>
+        <button id="chatroom-button" class="profile-button" {% if is_in_chatroom %} enabled {% else %} disabled {% endif %} data-otheruser="{{ other_user_username }}">Chatroom</button><br><br>
+        <div class="search-container">
+            <input type="text" id="breed_search" placeholder="Search for a dog breed..." autocomplete="off">
+            <ul id="breed_options" class="dropdown"></ul>
+            <button id="search_user_button" disabled>Search for User</button>
+        </div>
+        <div>
+            <h2>Random User's Profile</h2>
+            <button id="random_user_button">Load Random User Profile</button>
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Location:</strong> <span id="location"></span></p>
+            <p><strong>Dog Name:</strong> <span id="dog_name"></span></p>
+            <p><strong>Breed:</strong> <span id="breed"></span></p>
+            <p><strong>Age:</strong> <span id="age"></span></p>
+            <p><strong>Description:</strong> <span id="description"></span></p>
+            <p><strong>Profile Image:</strong> <img id="profile_image" src="" alt="Profile Image"></p>
+            <p><strong>Dog Image:</strong> <img id="dog_image" src="" alt="Dog Image"></p>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='scripts/user_dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('images/dog-1.jpg') no-repeat center center/cover;
+    filter: blur(6px);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Neuton", sans-serif;
+    text-align: center;
+    color: #ffa83d; /* Set text color to orange */
+}
+
+.container {
+    max-width: 80%;
+    width: 75vw;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    color: #ffa83d; /* Set text color inside the container to orange */
+}
+
+#welcome-message {
+    font-size: 90px; /* Increased font size for the welcome message */
+    margin: 0 0 20px 0;
+}
+
+p {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    color: #ffa83d;
+    padding: 12px 32px 16px 32px;
+    border: 2px solid #ffa83d;
+    border-radius: 8px;
+    font-size: 26px;
+    width: 160px;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #ff9320;
+    color: #FFFFFF;
+    border-color: #ff9320;
+}

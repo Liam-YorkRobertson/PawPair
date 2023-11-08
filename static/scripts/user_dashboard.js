@@ -17,10 +17,27 @@ $(document).ready(function() {
         }
     });
 
-    $('#chatroom-button').on('click', function() {
-        var otherUser = $('#chatroom-button').data('otheruser');
+    function redirectToChatroom() {
+        $.ajax({
+            url: '/get_chatroom_username',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    var otherUser = data.username;
+                    window.location.href = '/chatroom/' + otherUser;
+                } else {
+                    console.error('Error getting chatroom username:', data.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
 
-        window.location.href = '/chatroom/' + otherUser;
+    $('#chatroom-button').on('click', function() {
+        redirectToChatroom();
     });
 
     // Function to fetch dog breeds from the server

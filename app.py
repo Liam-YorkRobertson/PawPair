@@ -183,6 +183,8 @@ def breeder_profile():
         business_name = request.form["business_name"]
         location = request.form["location"]
         specialization = request.form["specialization"]
+        contact_telephone = request.form["contact_telephone"]
+        contact_email = request.form["contact_email"]
         profile_image = request.files["profile_image"]
         profile_image_path = os.path.join(app.config["UPLOAD_FOLDER"], "breeder_profile_images", secure_filename(profile_image.filename))
         profile_image.save(profile_image_path)
@@ -199,15 +201,19 @@ def breeder_profile():
         cur.close()
         cur = mysql.connection.cursor()
         if existing_profile:
-            cur.execute("UPDATE breeder_profiles SET business_name=%s, location=%s, specialization=%s, profile_image=%s WHERE user_id=%s",
-                        (business_name, location, specialization, os.path.join("breeder_profile_images", secure_filename(profile_image.filename)), user_id))
+            cur.execute("UPDATE breeder_profiles SET business_name=%s, location=%s, specialization=%s, contact_telephone=%s, contact_email=%s, profile_image=%s WHERE user_id=%s",
+                        (business_name, location, specialization, contact_telephone, contact_email, os.path.join("breeder_profile_images", secure_filename(profile_image.filename)), user_id))
         else:
-            cur.execute("INSERT INTO breeder_profiles (user_id, username, business_name, location, specialization, profile_image) VALUES (%s, %s, %s, %s, %s, %s)",
-                        (user_id, username, business_name, location, specialization, os.path.join("breeder_profile_images", secure_filename(profile_image.filename))))
+            cur.execute("INSERT INTO breeder_profiles (user_id, username, business_name, location, specialization, contact_telephone, contact_email, profile_image) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                        (user_id, username, business_name, location, specialization, contact_telephone, contact_email, os.path.join("breeder_profile_images", secure_filename(profile_image.filename))))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for("breeder_dashboard"))
     return render_template("breeder_profile.html")
+
+@app.route("/breeder_dashboard")
+def breeder_dashboard():
+    return render_template("breeder_dashboard.html")
 
 @app.route("/get_location")
 def get_location():
@@ -239,6 +245,31 @@ def search_users():
     cur.close()
     return render_template("user_list.html", user_profiles=user_profiles, breed=breed)
 
+@app.route("/get_chatroom_username", methods=["GET"])
+def get_chatroom_username():
+    logged_in_username = session.get('username')
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT receiver_username, sender_username FROM messages WHERE receiver_username = %s OR sender_username = %s LIMIT 1", (logged_in_username, logged_in_username))
+    chatroom_data = cursor.fetchone()
+    cursor.close()
+
+    if chatroom_data:
+        if chatroom_data['receiver_username'] == logged_in_username:
+            other_user = chatroom_data['sender_username']
+        else:
+            other_user = chatroom_data['receiver_username']
+
+        response_data = {
+            "success": True,
+            "username": other_user
+        }
+    else:
+        response_data = {
+            "success": False,
+            "error": "No chatroom found."
+        }
+    return jsonify(response_data)
+
 def get_user_id(username):
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
@@ -249,39 +280,118 @@ def get_user_id(username):
     else:
         return None
 
-@socketio.on('connectToUser')
-def connect_to_user(data):
-    sender_username = session.get('username')
-    receiver_username = data['username']
-    chatroom_id = f'{sender_username}_{receiver_username}'
-    join_room(chatroom_id)
-    emit('chatroomCreated', {'chatroom_id': chatroom_id})
-    
+def get_breeder_profiles(location):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM breeder_profiles WHERE location = %s", (location,))
+    breeder_profiles = cur.fetchall()
+
+    # Convert the list of dictionaries to a list of tuples
+    breeder_profiles_list = []
+    for profile in breeder_profiles:
+        breeder_profiles_list.append({
+            'username': profile['username'],
+            'business_name': profile['business_name'],
+            'location': profile['location'],
+            'specialization': profile['specialization'],
+            'contact_telephone': profile['contact_telephone'],
+            'contact_email': profile['contact_email'],
+            'profile_image': profile['profile_image']
+        })
+
+    cur.close()
+    return breeder_profiles_list
+ 
 @app.route("/chatroom/<username>")
 def chatroom(username):
     sender_username = session.get('username')
-    chatroom_id = f"{sender_username}_{username}"
+    # Check if there's an existing chatroom with the given sender and receiver usernames
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT chatroom_id FROM messages WHERE (sender_username = %s AND receiver_username = %s) OR (sender_username = %s AND receiver_username = %s) LIMIT 1", (sender_username, username, username, sender_username))
+    existing_chatroom = cursor.fetchone()
+    cursor.close()
+
+    if existing_chatroom:
+        chatroom_id = existing_chatroom['chatroom_id']
+    else:
+        # If no existing chatroom found, create a new chatroom_id
+        chatroom_id = f"{sender_username}_{username}"
+
     # Fetch chat messages for the specific chatroom from the messages table
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM messages WHERE chatroom_id = %s", (chatroom_id,))
     messages = cursor.fetchall()
     cursor.close()
+    
+    # Get the location of the signed-in user from the user_profiles table
+    signed_in_username = session.get('username')
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT location FROM user_profiles WHERE username = %s", (signed_in_username,))
+    signed_in_user_location = cur.fetchone().get('location')
+    cur.close()
 
-    return render_template("chatroom.html", sender_username=sender_username, receiver_username=username, messages=messages, chatroom_id=chatroom_id)
-
+    # Fetch breeder profiles in the same location as the signed-in user
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM breeder_profiles WHERE location = %s", (signed_in_user_location,))
+    breeder_profiles = cur.fetchall()
+    cur.close()
+    
+    return render_template("chatroom.html", sender_username=signed_in_username, receiver_username=username, messages=messages, chatroom_id=chatroom_id, breeder_profiles=breeder_profiles)
+    
 @socketio.on("connectToUser")
 def handle_connect_to_user(data):
     sender_username = session.get('username')
     receiver_username = data['username']
+    session['receiver_username'] = receiver_username  # Store receiver's username in session
     room = f"{sender_username}_{receiver_username}"
     join_room(room)
 
 @socketio.on("chatMessage")
 def handle_chat_message(data):
-    sender_username = data['username']
-    message = data['message']
-    room = f"{sender_username}_{session.get('username')}"
-    emit("chatMessage", {"sender": sender_username, "message": message}, room=room)
+    sender_username = session.get('username')  # Retrieve sender's username from the session
+    receiver_username = data['receiver_username']
     
+    # Check if there's an existing chatroom with the given sender and receiver usernames
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT chatroom_id FROM messages WHERE (sender_username = %s AND receiver_username = %s) OR (sender_username = %s AND receiver_username = %s) LIMIT 1", (sender_username, receiver_username, receiver_username, sender_username))
+    existing_chatroom = cursor.fetchone()
+    cursor.close()
+
+    if existing_chatroom:
+        chatroom_id = existing_chatroom['chatroom_id']
+    else:
+        # If no existing chatroom found, create a new chatroom_id
+        chatroom_id = f"{sender_username}_{receiver_username}"
+
+    sender_id = get_user_id(sender_username)
+    receiver_id = get_user_id(receiver_username)
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO messages (chatroom_id, sender_id, receiver_id, sender_username, receiver_username, message) VALUES (%s, %s, %s, %s, %s, %s)",
+                   (chatroom_id, sender_id, receiver_id, sender_username, receiver_username, data['message']))
+    mysql.connection.commit()
+    cursor.close()
+
+    room = f"{sender_username}_{receiver_username}"
+    emit("chatMessage", {"sender": sender_username, "message": data['message']}, room=room)
+
+@app.route('/terminate_chatroom', methods=['DELETE'])
+def terminate_chatroom():
+    sender_username = session.get('username')
+    receiver_username = request.args.get('receiver_username')
+
+    # Check if the logged-in user is in sender_username or receiver_username,
+    # and if receiver_username matches the one in the URL
+    cursor = mysql.connection.cursor()
+    cursor.execute("DELETE FROM messages WHERE ((sender_username = %s AND receiver_username = %s) OR (sender_username = %s AND receiver_username = %s))",
+                   (sender_username, receiver_username, receiver_username, sender_username))
+    mysql.connection.commit()
+    cursor.close()
+
+    return jsonify(success=True), 200
+
+@app.route('/user_thank_you')
+def user_thank_you():
+    return render_template('user_thank_you.html')
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, host="105.185.160.28", port=5000, debug=True)

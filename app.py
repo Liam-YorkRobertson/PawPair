@@ -55,7 +55,6 @@ def login():
         user = cur.fetchone()
         cur.close()
         if user:
-            # Store the username in the session
             session['username'] = user['username']
             cur = mysql.connection.cursor()
             cur.execute("SELECT * FROM user_profiles WHERE username = %s", (user['username'],))
@@ -394,4 +393,4 @@ def user_thank_you():
     return render_template('user_thank_you.html')
 
 if __name__ == "__main__":
-    socketio.run(app, host="105.185.160.28", port=5000, debug=True)
+    socketio.run(app, debug=True)

@@ -1,26 +1,212 @@
-.tooltip {
-    position: relative;
-    display: inline-block;
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('./images/dog-12.jpg') no-repeat center center/cover;
+    filter: blur(6px);
 }
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #333;
-    color: #fff;
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Neuton", sans-serif;
     text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    color: #ffa83d;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+.navbar {
+    background-color: #ffa83d;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    margin: 0;
+    margin-top: -5px;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navbar-left {
+    margin-left: 15px;
+}
+
+.navbar-right {
+    margin-top: -4px;
+}
+
+.navbar-right .logout-link {
+    margin-right: 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Style the logout link on hover */
+.navbar-right .logout-link:hover {
+    text-decoration: underline;
+}
+
+.dashboard-container {
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px; /* Adjust the margin based on the height of the navbar */
+    padding-bottom: 20px;
+    min-height: calc(100vh - 100px); /* Subtract the height of the navbar from the viewport height */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+.search-container {
+    width: 80vw;
+    max-width: 60%;
+    margin-top: 100px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    height: 20px;
+    border: 2px solid #ffa83d;
+    border-radius: 5px;
+}
+
+.dropdown {
+    width: 98.5%;
+    font-size: 17px;
+    height: 30px;
+    border: 1px solid #ffa83d;
+    list-style: none;
+    margin: 0 5px 0 0;
+    display: none;
+    z-index: 1000;
+    background-color: #FFFFFF;
+}
+
+.dropdown li {
+    border-bottom: 1px solid #ffa83d;
+}
+
+.dropdown li:last-child {
+    border-bottom: none;
+}
+
+.random-user-info {
+    width: 80vw;
+    max-width: 400px;
+    margin-top: auto;
+    margin-bottom: -100px;
+    position: absolute;
+}
+
+.random-heading {
+    font-size: 36px;
+}
+
+#search_user_button {
+    margin-top: 15px;
+}
+
+#random_user_button {
+    width: 300px;
+}
+
+.user-details-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    max-width: 80%;
+    height: 20vh;
+    background-color: #FFFFFF;
+    border: 2px solid #ffa83d;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: auto;
+    margin-bottom: 50px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-image img {
+    margin-top: 20px;
+    margin-left:20px;
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    border:2px solid #f59d31;
+    object-fit: cover;
+}
+
+.username span {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.dog-image img {
+    margin-right: 20px;
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    border:2px solid #f59d31;
+    object-fit: cover;
+    margin-top: -5px;
+}
+
+.user-details {
+    font-size: 18px;
+}
+
+.user-details-text {
+    margin-left: 40px;
+    flex: 1;
+    text-align: left; /* Align the text to the left */
+}
+
+.dashboard-button {
+    background-color: #FFFFFF;
+    color: #ffa83d;
+    padding: 12px 24px;
+    border: 2px solid #ffa83d;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    width: 200px; /* Set a specific width for the buttons */
+    text-align: center; /* Center the button text */
+    margin-right: 10px; /* Add right margin between buttons */
+}
+
+.dashboard-button:hover {
+    background-color: #ff9320;
+    color: #FFFFFF;
 }

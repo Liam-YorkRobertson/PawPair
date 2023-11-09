@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PawPair</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/user_thank_you.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/user_thank_you.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
 </head>
 <body>
-    <div>
-        Thank you for using our services!
+    <div class="container">
+        <div class="thank-you-message">
+            Thank You for Using Our Services!
+        </div>
+        <div class="redirect-message">
+            You Will be Redirected to the Dashboard in <span id="counter">x</span> Seconds.
+        </div>    
+        <script src="{{ url_for('static', filename='scripts/user_thank_you.js') }}"></script>
     </div>
-    <div>
-        You will be redirected to the dashboard in <span id="counter">x</span> seconds.
-    </div>    
-    <script src="{{ url_for('static', filename='scripts/user_thank_you.js') }}"></script>
 </body>
 </html>

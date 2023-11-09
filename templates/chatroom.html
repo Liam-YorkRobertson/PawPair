@@ -5,45 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PawPair</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="icon" href="{{url_for('static', filename='styles/images/icons/PawPair-icon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chatroom.css') }}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
-<body>
-    <div id="chat-container" class="chat-container">
-        <div id="chat-messages" class="message-container">
-            {% for message in messages %}
-                {% if message.sender_username == sender_username %}
-                    <div class="message sender">
-                {% else %}
-                    <div class="message receiver">
-                {% endif %}
-                    {{ message.sender_username }}: {{ message.message }}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="message-form">
-            <input type="hidden" id="receiver-username" value="{{ receiver_username }}">
-            <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
-            <button id="send-button" class="send-button">Send</button>
-        </div>
-        <input type="hidden" id="chatroom-id" value="{{ chatroom_id }}">
+<header class="navbar">
+    <div class="navbar-left">
+        <h1 class="logo">PawPair</h1>
     </div>
-    <div>
-        <button id="terminate-chatroom-btn" class="terminate-button">This isn't going to work out</button>
-        <button id="schedule-dog-date-btn" class="schedule-button">They're going on a dog date</button>
+    <div class="navbar-right">
+        <a href="/user_dashboard" class="dashboard-link">Dashboard</a>
+    </div>
+</header>
+<body class="body">
+    <div class="chat-section">
+        <div class="button-container">
+            <button id="terminate-chatroom-btn" class="terminate-button button">This Isn't Going to Work Out</button>
+            <button id="schedule-dog-date-btn" class="schedule-button button">They're Going on a Dog Date</button>
+        </div>
+        <div id="chat-container" class="chat-container chat-box">
+            <div id="chat-messages" class="message-container chat-messages">
+                {% for message in messages %}
+                    {% if message.sender_username == sender_username %}
+                        <div class="message sender">
+                    {% else %}
+                        <div class="message receiver">
+                    {% endif %}
+                        <span class="message-sender">{{ message.sender_username }}</span>: {{ message.message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="message-form">
+                <input type="hidden" id="receiver-username" value="{{ receiver_username }}">
+                <input type="text" id="message-input" class="message-input input-field" placeholder="Type your message...">
+                <button id="send-button" class="send-button button">Send</button>
+            </div>
+            <input type="hidden" id="chatroom-id" value="{{ chatroom_id }}">
+        </div>
     </div>
     <div class="breeder-list-container">
-        <h2>Professional breeders near your location:</h2>
-        <div id="breeder-list-container">
+        <h2 class="breeder-list-title">Professional Breeders Near Your Location:</h2>
+        <div id="breeder-list-container" class="breeder-list">
             {% for breeder_profile in breeder_profiles %}
-                <div class="user-profile">
-                    <p><strong>Username:</strong> {{ breeder_profile.username }}</p>
-                    <p><strong>Business Name:</strong> {{ breeder_profile.business_name }}</p>
-                    <p><strong>Location:</strong> {{ breeder_profile.location }}</p>
-                    <p><strong>Specialization:</strong> {{ breeder_profile.specialization }}</p>
-                    <p><strong>Contact Telephone:</strong> {{ breeder_profile.contact_telephone }}</p>
-                    <p><strong>Contact Email:</strong> {{ breeder_profile.contact_email }}</p>
-                    <p><strong>Profile Image:</strong><img src="/static/images/{{ breeder_profile.profile_image }}" alt="Profile Image"></p>
+                <div class="user-profile breeder-profile">
+                    <p class="profile-info"><strong>Username:</strong> {{ breeder_profile.username }}</p>
+                    <p class="profile-info"><strong>Business Name:</strong> {{ breeder_profile.business_name }}</p>
+                    <p class="profile-info"><strong>Location:</strong> {{ breeder_profile.location }}</p>
+                    <p class="profile-info"><strong>Specialization:</strong> {{ breeder_profile.specialization }}</p>
+                    <p class="profile-info"><strong>Contact Telephone:</strong> {{ breeder_profile.contact_telephone }}</p>
+                    <p class="profile-info"><strong>Contact Email:</strong> {{ breeder_profile.contact_email }}</p>
+                    <div class="profile-image-container">
+                        <img class="profile-image" src="/static/images/{{ breeder_profile.profile_image }}" alt="Profile Image">
+                    </div>
                 </div>
             {% endfor %}
         </div>

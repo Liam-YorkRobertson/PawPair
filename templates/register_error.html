@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Error</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PawPair</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/register_error.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Error</h1>
-    <p>{{ message }}</p>
-    <a href="/register">Go back to registration</a>
+    <div class="error-container">
+        <p class="error-message">Registration Failed: Email Already in Use. <br>
+            <a href="/register" class="error-link">Try Again</a>.</p>
+    </div>
 </body>
 </html>

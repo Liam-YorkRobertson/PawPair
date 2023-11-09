@@ -1,18 +1,85 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('./images/dog-17.jpg') no-repeat center center/cover;
+    filter: blur(6px);
+}
+
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Neuton", sans-serif;
+    text-align: center;
+    color: #ffa83d;
+}
+
+.navbar {
+    background-color: #ffa83d;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    margin: 0;
+    margin-top: -5px;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navbar-left {
+    margin-left: 15px;
+}
+
+.navbar-right {
+    margin-top: -4px;
+}
+
+.navbar-right .dashboard-link {
+    margin-right: 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Style the logout link on hover */
+.navbar-right .dashboard-link:hover {
+    text-decoration: underline;
+}
+
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
 }
 
 .chat-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
     margin-top: 50px;
+    min-width: 20vw;
+    width: 30vw;
+    padding: 40px 40px 20px 40px;
+    border: 1px solid #ffa83d;
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
 .message-container {
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .message {
@@ -22,31 +89,103 @@ body {
 }
 
 .sender {
-    background-color: #DCF8C6;
-    text-align: left; /* Align sender messages to the left */
+    background-color: #f7e5bf;
+    text-align: left;
 }
 
 .receiver {
-    background-color: #DCF8C6;
-    text-align: right; /* Align receiver messages to the right */
+    background-color: #e9e4da;
+    text-align: right;
 }
 
 .message-form {
     display: flex;
     margin-top: 20px;
+    align-items: flex-end; /* Align items to the bottom */
 }
 
-.message-input {
+.input-field {
     flex: 1;
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ffa83d;
+    border-radius: 5px;
 }
 
 .send-button {
-    background-color: #4CAF50;
+    background-color: #e48913;
+    color: white;
+    border: none;
+    padding: 12.5px 16px; /* Adjust padding to make the button smaller */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #c7842d;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around; /* Adjust as needed for spacing between buttons */
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add margin between buttons and chatroom */
+}
+
+.terminate-button,
+.schedule-button {
+    background-color: #f0a33f;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px; /* Set a specific width for the buttons if needed */
+}
+
+.terminate-button:hover,
+.schedule-button:hover {
+    background-color: #c57308;;
+}
+
+.breeder-list-container {
+    margin-top: 20px;
+}
+
+.breeder-list-title {
+    color: #ffa83d;
+    font-size: 32px;
+    margin-bottom: 50px;
+}
+
+.breeder-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.breeder-profile {
+    background-color: #ffffff;
+    border: 2px solid #ffa83d;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    margin-bottom: 10px;
+}
+
+.profile-image-container {
+    margin-top: 10px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }

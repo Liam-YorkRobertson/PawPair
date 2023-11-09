@@ -1,0 +1,112 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('./images/dog-7.jpg') no-repeat center center/cover;
+    filter: blur(6px);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    font-family: "Neuton", sans-serif;
+    text-align: center;
+    color: #ffa83d;
+}
+
+.navbar {
+    background-color: #ffa83d;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    margin: 0;
+    margin-top: -5px;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navbar-left {
+    margin-left: 15px;
+}
+
+.navbar-right {
+    margin-top: -4px;
+}
+
+.navbar-right .dashboard-link {
+    margin-right: 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Style the logout link on hover */
+.navbar-right .dashboard-link:hover {
+    text-decoration: underline;
+}
+
+.profile-container {
+    max-width: 400px;
+    width: 80%;
+    margin-top: 95px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.profile-label {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.profile-input,
+.profile-textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 2px solid #ffa83d;
+    border-radius: 5px;
+    text-align: left;
+}
+
+#location-display {
+    font-size: 20px;
+}
+
+.profile-button {
+    background-color: #FFFFFF;
+    color: #ffa83d;
+    padding: 12px 24px;
+    border: 2px solid #ffa83d;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}
+
+.profile-button:hover {
+    background-color: #ff9320;
+    color: #FFFFFF;
+}

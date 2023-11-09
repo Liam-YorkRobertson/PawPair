@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Success</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PawPair</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/register_success.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Registration Successful</h1>
-    <p>Welcome, {{ username }}!</p>
-    <a href="/login">Go to login</a>
+    <div class="success-container">
+        <h1 class="success-title">Registration Successful</h1>
+        <p class="success-message">Welcome, <span id="username">{{ username }}</span>!</p>
+        <a href="/login" class="success-link">Go to login</a>
+    </div>
 </body>
 </html>

@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User or Breeder</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PawPair</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/user_or_breeder.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Register as</h1>
-    <button onclick="window.location.href='/user_profile'">User</button>
-    <button onclick="window.location.href='/breeder_profile'">Professional Breeder</button>
+    <div class="container">
+        <h1 class="title">Register as</h1>
+        <button class="button" onclick="window.location.href='/user_profile'">User</button>
+        <button class="button" onclick="window.location.href='/breeder_profile'">Professional Breeder</button>
+    </div>
     <script src="{{ url_for('static', filename='scripts/user_or_breeder.js') }}"></script>
 </body>
 </html>

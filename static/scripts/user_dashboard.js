@@ -6,12 +6,16 @@ $(document).ready(function() {
 
     // Dog breed search box interaction
     var selectedBreed = "";
+    
     $('#breed_search').on('input', function() {
         var searchQuery = $(this).val().toLowerCase();
+        var breedOptionsUl = $('#breed_options');
+        
         if (searchQuery.length >= 2) {
             fetchDogBreeds(searchQuery);
+            breedOptionsUl.show(); // Show the dropdown when there is a search query
         } else {
-            $('#breed_options').empty();
+            breedOptionsUl.empty().hide(); // Hide and empty the dropdown when the search query is less than 2 characters
             selectedBreed = "";
             $('#search_user_button').prop('disabled', true);
         }

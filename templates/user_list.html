@@ -5,29 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PawPair</title>
-    <link rel="stylesheet" href="./style.css"> <!-- Placeholder for your styles -->
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!-- Placeholder for your favicon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/user_list.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
+<header class="navbar">
+    <div class="navbar-left">
+        <h1 class="logo">PawPair</h1>
+    </div>
+    <div class="navbar-right">
+        <a href="/user_dashboard" class="dashboard-link">Dashboard</a>
+    </div>
+</header>
 <body>
-    <h1>User List</h1>
-
-    <div id="user_list_container">
-        {% for user_profile in user_profiles %}
-        {% if user_profile.breed == request.args.get('breed') %}
-        <div class="user-profile">
-            <p><strong>Username:</strong> {{ user_profile.username }}</p>
-            <p><strong>Location:</strong> {{ user_profile.location }}</p>
-            <p><strong>Dog Name:</strong> {{ user_profile.dog_name }}</p>
-            <p><strong>Breed:</strong> {{ user_profile.breed }}</p>
-            <p><strong>Age:</strong> {{ user_profile.age }}</p>
-            <p><strong>Description:</strong> {{ user_profile.description }}</p>
-            <p><strong>Profile Image:</strong><img src="/static/images/{{ user_profile.profile_image }}" alt="Profile Image"></p>
-            <p><strong>Dog Image:</strong><img src="/static/images/{{ user_profile.dog_image }}" alt="Dog Image"></p>
-            <button class="connect-button" onclick="connectToUser('{{ user_profile.username }}')">Connect to User</button>
+    <div class="content-container">
+        <h1>User List</h1>
+        <div id="user_list_container">
+            {% for user_profile in user_profiles %}
+            {% if user_profile.breed == request.args.get('breed') %}
+            <div class="user-details-card">
+                <div class="profile-info">
+                    <div class="profile-image">
+                        <img id="profile_image" class="user-image" src="/static/images/{{ user_profile.profile_image }}" alt="Profile Image">
+                    </div>
+                    <div class="username">
+                        <span id="username">{{ user_profile.username }}</span>
+                    </div>
+                </div>
+                <div class="user-details-text">
+                    <div class="user-details">
+                        <p><strong>Location:</strong> <span id="location">{{ user_profile.location }}</span></p>
+                        <p><strong>Dog's Name:</strong> <span id="dog_name">{{ user_profile.dog_name }}</span></p>
+                        <p><strong>Breed:</strong> <span id="breed">{{ user_profile.breed }}</span></p>
+                        <p><strong>Age:</strong> <span id="age">{{ user_profile.age }}</span></p>
+                        <p><strong>Description:</strong> <span id="description">{{ user_profile.description }}</span></p>
+                    </div>
+                </div>
+                <div class="dog-image">
+                    <img id="dog_image" class="user-image" src="/static/images/{{ user_profile.dog_image }}" alt="Dog Image">
+                </div>
+                <button class="connect-button" onclick="connectToUser('{{ user_profile.username }}')">Connect to User</button>
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endif %}
-        {% endfor %}
     </div>
     <script src="{{ url_for('static', filename='scripts/user_list.js') }}"></script>
 </body>

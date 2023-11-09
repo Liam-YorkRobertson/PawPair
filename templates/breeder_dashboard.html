@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PawPair</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/user_dashboard.css') }}">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!-- Placeholder for your favicon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/breeder_dashboard.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
 </head>
+<header class="navbar">
+    <div class="navbar-left">
+        <h1 class="logo">PawPair</h1>
+    </div>
+    <div class="navbar-right">
+        <a href="/login" class="logout-link">Log Out</a>
+    </div>
+</header>
 <body>
-    <div>
-        <button onclick="window.location.href='/breeder_profile'">Your Profile</button><br><br>
+    <div class="breeder-dashboard-container">
+        <h1 class="dashboard-title">
+            Thank You For Creating Your Profile on PawPair. 
+        </h1>
+        <div class="dashboard-message">
+            Your Professional Profile Will be Visible to Nearby Normal Users Discussing Cross-breeding Their Dogs.
+            They Will be Recommended to Contact You to Consult Whether Their Dogs are Compatible
+        </div>
+        <button class="profile-button" onclick="window.location.href='/breeder_profile'">Your Profile</button><br><br>
     </div>
     <script src="{{ url_for('static', filename='scripts/breeder_dashboard.js') }}"></script>
 </body>

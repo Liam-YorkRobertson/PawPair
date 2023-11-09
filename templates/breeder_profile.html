@@ -5,29 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PawPair</title>
-    <link rel="stylesheet" href="./style.css"> <!--placeholder-->
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"> <!--placeholder-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton">
+    <link rel="stylesheet" href="./static/styles/breeder_profile.css">
+    <link rel="icon" href="./static/styles/images/icons/PawPair-icon.png" type="image/x-icon">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhgGTbERJQi_NKs2xS3iAxX303W3fQ6iY&libraries=places"></script>
 </head>
+<header class="navbar">
+    <div class="navbar-left">
+        <h1 class="logo">PawPair</h1>
+    </div>
+    <div class="navbar-right">
+        <a href="/breeder_dashboard" class="dashboard-link">Dashboard</a>
+    </div>
+</header>
 <body>
-    <main>
-        <h1>Create Your PawPair Breeder Profile</h1>
-        <form action="/breeder_profile" method="POST" enctype="multipart/form-data">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-            <label for="business_name">Business Name:</label>
-            <input type="text" id="business_name" name="business_name" required><br>
+    <main class="profile-container">
+        <h1>Create Your PawPair Professional Breeder Profile</h1>
+        <form action="/breeder_profile" method="POST" enctype="multipart/form-data" class="profile-form">
+            <label for="username" class="profile-label">Username:</label>
+            <input type="text" id="username" name="username" required class="profile-input"><br>
+            <label for="business_name" class="profile-label">Business Name:</label>
+            <input type="text" id="business_name" name="business_name" required class="profile-input"><br>
+            <label for="specialization" class="profile-label">Specialization:</label>
+            <input type="text" id="specialization" name="specialization" required class="profile-input"><br>
+            <label for="contact_telephone" class="profile-label">Contact Telephone:</label>
+            <input type="tel" id="contact_telephone" name="contact_telephone" required class="profile-input"><br>
+            <label for="contact_email" class="profile-label">Contact Email:</label>
+            <input type="email" id="contact_email" name="contact_email" required class="profile-input"><br>
+            <label for="profile_image" class="profile-label">Profile Image:</label>
+            <input type="file" id="profile_image" name="profile_image" accept="image/*" required class="profile-input"><br>
             <input type="hidden" id="location" name="location" value="">
             <div id="location-display"></div>
-            <label for="specialization">Specialization:</label>
-            <input type="text" id="specialization" name="specialization" required><br>
-            <label for="contact_telephone">Contact Telephone:</label>
-            <input type="tel" id="contact_telephone" name="contact_telephone" required><br>
-            <label for="contact_email">Contact Email:</label>
-            <input type="email" id="contact_email" name="contact_email" required><br>
-            <label for="profile_image">Profile Image:</label>
-            <input type="file" id="profile_image" name="profile_image" accept="image/*" required><br>
-            <button type="submit">Create Breeder Profile</button>
+            <button type="submit" class="profile-button">Create Breeder Profile</button>
         </form>
     </main>
     <script src="{{ url_for('static', filename='scripts/profile.js') }}"></script>

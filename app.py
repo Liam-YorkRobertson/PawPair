@@ -3,7 +3,6 @@ from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 import os
 import requests
-import random
 from flask_socketio import SocketIO, emit, join_room
 
 app = Flask(__name__)
@@ -378,8 +377,6 @@ def terminate_chatroom():
     sender_username = session.get('username')
     receiver_username = request.args.get('receiver_username')
 
-    # Check if the logged-in user is in sender_username or receiver_username,
-    # and if receiver_username matches the one in the URL
     cursor = mysql.connection.cursor()
     cursor.execute("DELETE FROM messages WHERE ((sender_username = %s AND receiver_username = %s) OR (sender_username = %s AND receiver_username = %s))",
                    (sender_username, receiver_username, receiver_username, sender_username))

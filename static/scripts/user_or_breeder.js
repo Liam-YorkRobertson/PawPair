@@ -1,5 +1,4 @@
-//Logic to allow user to create basic profile or professional breeder profile
-
+// logic to allow user to create basic profile or professional breeder profile
 function redirectToUserProfile() {
     window.location.href = "/user_profile";
 }

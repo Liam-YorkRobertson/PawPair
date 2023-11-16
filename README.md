@@ -47,4 +47,4 @@ Check out these related projects:
 Encountering anticipated challenges during the project, time constraints led to the exclusion of certain functionalities, such as an extensive dashboard for professional breeders and a different chatroom for users and breeders. The most demanding aspect was implementing the chatroom functionality using socket.io, involving multiple database tables, Flask routes, JavaScript methods, and jQuery. As the sole contributor, I navigated various online resources and used AI to comprehend and address these concepts. Micro-adjustments to the code were crucial in resolving issues, and a small workaround ensured dynamic message loading in the chatroom. Another hurdle involved CSS styling without frameworks, requiring extensive development and adjustments for visual appeal. Overall, bug fixing emerged as the most challenging technical aspect of the project.
 ## Licensing
 
-PawPair is licensed under the [MIT License](PawPair/LICENSE).
+PawPair is licensed under the [MIT License](LICENSE).

@@ -1,5 +1,5 @@
 # PawPair
-![PawPair logo](https://imgur.com/a/d5v8N46)  
+![PawPair-icon](https://github.com/Liam-YorkRobertson/PawPair/assets/105305808/ef8af6cd-8b83-4de1-a4cc-c57d1541391a)
 ## Introduction
 Welcome to PawPair, a web application designed to bring canine enthusiasts together, fostering connections and interactions between dogs and their owners.
 **Deployment:** [PawPair Web App](https://liamyork.pythonanywhere.com/)

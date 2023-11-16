@@ -7,7 +7,7 @@ Welcome to PawPair, a web application designed to bring canine enthusiasts toget
 **My LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/liam-york-robertson) 
 **Final Project Blog Article:** [Read Blog Post](https://medium.com/@liamyorkdeonrobertson/my-first-web-application-pawpair-631030ddf0d5) 
 ## The Inspiration Behind the Project
-![PawPair Screenshot](https://imgur.com/a/bUvyNPk) 
+![PawPair-Welcome](https://github.com/Liam-YorkRobertson/PawPair/assets/105305808/c1d28f63-0711-4f31-8945-a0725b4d39d6)
 The project was inspired by my dog, Zascha, a 6-year-old golden border retriever that we adopted from a shelter. My fascination with her parent breeds and cross-breeds during my teenage years led to the idea of creating the web application. Originally considering a stock market-related app, I came across IdeaDog (which had nothing to do with dogs funnily enough), inspiring me to develop a platform for connecting people interested in cross-breeding their dogs.
 ## Installation
 To run PawPair locally, follow these steps:
@@ -20,7 +20,7 @@ To run PawPair locally, follow these steps:
 5. Install dependencies: `pip install -r requirements.txt`
 6. Run the application: `python app.py`
 ## Usage
-![PawPair chatroom](https://imgur.com/a/BcQjUOs) 
+![PawPair-chatroom](https://github.com/Liam-YorkRobertson/PawPair/assets/105305808/c58b7646-50d1-4ec1-aa80-396a3bf092a1)
 PawPair provides a user-friendly interface for dog owners to:
 - Register and create a profile for their dogs.
 - Connect with other users interested in cross-breeding.
